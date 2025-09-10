@@ -1,0 +1,12 @@
+def word_counter():
+    print("Welcome to the Word Counter!")
+    text = input("Enter a sentence or paragraph: ")
+
+    # Split the text into words based on spaces
+    words = text.split()
+    count = len(words)
+
+    print(f"The number of words in your text is: {count}")
+
+# Run the program
+word_counter()
