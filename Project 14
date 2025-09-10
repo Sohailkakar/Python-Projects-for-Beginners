@@ -1,0 +1,35 @@
+def banking_system():
+    balance = 0.0  # Starting balance
+
+    print("Welcome to the Simple Banking System!")
+
+    while True:
+        print("\nChoose an option:")
+        print("1. Check balance")
+        print("2. Deposit money")
+        print("3. Withdraw money")
+        print("4. Exit")
+
+        choice = input("Enter your choice (1/2/3/4): ")
+
+        if choice == "1":
+            print(f"Your balance is: ${balance:.2f}")
+        elif choice == "2":
+            amount = float(input("Enter deposit amount: "))
+            balance += amount
+            print(f"${amount:.2f} deposited. New balance: ${balance:.2f}")
+        elif choice == "3":
+            amount = float(input("Enter withdrawal amount: "))
+            if amount <= balance:
+                balance -= amount
+                print(f"${amount:.2f} withdrawn. New balance: ${balance:.2f}")
+            else:
+                print("Insufficient funds.")
+        elif choice == "4":
+            print("Thank you for using the banking system. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the program
+banking_system()
