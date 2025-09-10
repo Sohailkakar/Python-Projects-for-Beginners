@@ -1,0 +1,21 @@
+def mad_libs():
+    print("Welcome to the Mad Libs Generator!")
+    print("Please provide a few words to create your funny story.")
+
+    # Collect words from the user
+    noun = input("Enter a noun: ")
+    adjective = input("Enter an adjective: ")
+    verb = input("Enter a verb: ")
+    place = input("Enter a place: ")
+
+    # Story template with placeholders
+    story = (
+        f"One day, a {adjective} {noun} decided to {verb} "
+        f"all the way to {place}. Everyone who saw it was amazed!"
+    )
+
+    print("\nHere is your story:")
+    print(story)
+
+# Run the program
+mad_libs()
