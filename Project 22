@@ -1,0 +1,43 @@
+from PIL import Image
+import os
+
+def resize_image(input_path, output_path, width=None, height=None, scale=None):
+    """
+    Resize an image and save it to a new file.
+
+    Parameters:
+        input_path (str): Path of the original image
+        output_path (str): Path where resized image will be saved
+        width (int, optional): New width in pixels
+        height (int, optional): New height in pixels
+        scale (float, optional): Scale factor (e.g., 0.5 for half size)
+    """
+    try:
+        # Open the image
+        img = Image.open(input_path)
+
+        # If scale is given, resize proportionally
+        if scale:
+            new_width = int(img.width * scale)
+            new_height = int(img.height * scale)
+        else:
+            # Use provided width and height, or keep original if not given
+            new_width = width if width else img.width
+            new_height = height if height else img.height
+
+        # Perform resizing with high-quality resampling
+        resized_img = img.resize((new_width, new_height), Image.LANCZOS)
+
+        # Save the resized image
+        resized_img.save(output_path)
+        print(f"Image successfully resized and saved to {output_path}")
+
+    except Exception as e:
+        print("Error while resizing image:", e)
+
+
+# Example usage
+if __name__ == "__main__":
+    # Make sure to replace 'input.jpg' with an actual image file on your system
+    resize_image("input.jpg", "resized.jpg", scale=0.5)   # Resize by 50%
+    resize_image("input.jpg", "resized_fixed.jpg", width=400, height=300)  # Resize to exact dimensions
