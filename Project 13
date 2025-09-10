@@ -1,0 +1,29 @@
+def advanced_calculator():
+    print("Welcome to the Advanced Calculator!")
+
+    while True:
+        num1 = float(input("\nEnter the first number: "))
+        num2 = float(input("Enter the second number: "))
+
+        print("Choose operation: +, -, *, /")
+        op = input("Enter operation (or type 'exit' to quit): ")
+
+        if op == '+':
+            print(f"Result: {num1 + num2}")
+        elif op == '-':
+            print(f"Result: {num1 - num2}")
+        elif op == '*':
+            print(f"Result: {num1 * num2}")
+        elif op == '/':
+            if num2 != 0:
+                print(f"Result: {num1 / num2}")
+            else:
+                print("Error: Division by zero.")
+        elif op.lower() == "exit":
+            print("Exiting calculator. Goodbye!")
+            break
+        else:
+            print("Invalid operation, try again.")
+
+# Run the program
+advanced_calculator()
