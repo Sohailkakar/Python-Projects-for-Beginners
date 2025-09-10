@@ -1,0 +1,62 @@
+# -----------------------------------
+# URL Shortener Project
+# -----------------------------------
+# This project creates a simple URL shortener using hashing and dictionaries.
+# It demonstrates how to generate unique codes and map them to long URLs.
+
+
+import hashlib
+
+
+class URLShortener:
+    """A class to create and manage shortened URLs."""
+
+    def __init__(self):
+        # Dictionary to store mapping: short_code -> original URL
+        self.url_map = {}
+
+    def shorten_url(self, original_url):
+        """
+        Create a short code for the given URL using hashing.
+        """
+        # Generate a hash object from the original URL
+        hash_object = hashlib.md5(original_url.encode())
+
+        # Take the first 6 characters of the hash as short code
+        short_code = hash_object.hexdigest()[:6]
+
+        # Save mapping in dictionary
+        self.url_map[short_code] = original_url
+
+        print(f"Shortened URL: {short_code}")
+        return short_code
+
+    def retrieve_url(self, short_code):
+        """
+        Retrieve the original URL using the short code.
+        """
+        if short_code in self.url_map:
+            print(f"Original URL: {self.url_map[short_code]}")
+            return self.url_map[short_code]
+        else:
+            print("Error: Short code not found.")
+            return None
+
+
+# -----------------------------------
+# Example Usage
+# -----------------------------------
+if __name__ == "__main__":
+    # Create a URL shortener instance
+    shortener = URLShortener()
+
+    # Step 1: Shorten a long URL
+    long_url = "https://www.example.com/this-is-a-very-long-url-for-testing"
+    code = shortener.shorten_url(long_url)
+
+    # Step 2: Retrieve the original URL using the short code
+    shortener.retrieve_url(code)
+
+    # Step 3: Try retrieving with an invalid code
+    shortener.retrieve_url("abcdef")
+
