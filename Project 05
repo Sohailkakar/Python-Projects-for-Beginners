@@ -1,0 +1,18 @@
+import random  # To generate random dice rolls
+
+def dice_roller():
+    print("Welcome to the Dice Roller Simulator!")
+
+    while True:
+        # Simulate rolling a die (values from 1 to 6)
+        roll = random.randint(1, 6)
+        print(f"You rolled a {roll}!")
+
+        # Ask if the user wants to roll again
+        choice = input("Do you want to roll again? (yes/no): ").lower()
+        if choice != "yes":
+            print("Thanks for playing! Goodbye.")
+            break
+
+# Run the program
+dice_roller()
