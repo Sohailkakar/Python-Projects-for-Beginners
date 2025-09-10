@@ -1,0 +1,15 @@
+import time  # To control time intervals
+
+def countdown_timer(seconds):
+    print(f"Countdown started for {seconds} seconds...")
+
+    while seconds > 0:
+        mins, secs = divmod(seconds, 60)  # Convert seconds into minutes and seconds
+        print(f"{mins:02d}:{secs:02d}")   # Format as MM:SS
+        time.sleep(1)                     # Wait for 1 second
+        seconds -= 1
+
+    print("Time's up!")
+
+# Run the timer
+countdown_timer(10)
