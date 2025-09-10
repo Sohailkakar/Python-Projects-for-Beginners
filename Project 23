@@ -1,0 +1,86 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+def create_dashboard():
+    # Simulated dataset
+    data = {
+        "Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "Sales": [1200, 1500, 1800, 2000, 2200, 2500],
+        "Expenses": [800, 950, 1100, 1200, 1300, 1400]
+    }
+
+    df = pd.DataFrame(data)
+    df["Profit"] = df["Sales"] - df["Expenses"]
+
+    # Create a figure with 3 subplots
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    fig.suptitle("Business Dashboard", fontsize=16, fontweight="bold")
+
+    # 1. Sales Trend (Line Plot)
+    sns.lineplot(x="Month", y="Sales", data=df, marker="o", ax=axes[0,0])
+    axes[0,0].set_title("Monthly Sales Trend")
+
+    # 2. Profit vs Expenses (Bar Plot)
+    df_melt = df.melt(id_vars="Month", value_vars=["Expenses", "Profit"])
+    sns.barplot(x="Month", y="value", hue="variable", data=df_melt, ax=axes[0,1])
+    axes[0,1].set_title("Expenses vs Profit")
+
+    # 3. Total Distribution (Pie Chart)
+    totals = [df["Sales"].sum(), df["Expenses"].sum(), df["Profit"].sum()]
+    labels = ["Sales", "Expenses", "Profit"]
+    axes[1,0].pie(totals, labels=labels, autopct="%1.1f%%", startangle=90)
+    axes[1,0].set_title("Overall Distribution")
+
+    # Hide unused subplot
+    axes[1,1].axis("off")
+
+    plt.tight_layout(rect=[0, 0, 1, 0.95])  # Adjust layout for title
+    plt.show()
+
+# Run the dashboard
+if __name__ == "__main__":
+    create_dashboard()
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+def create_dashboard():
+    # Simulated dataset
+    data = {
+        "Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        "Sales": [1200, 1500, 1800, 2000, 2200, 2500],
+        "Expenses": [800, 950, 1100, 1200, 1300, 1400]
+    }
+
+    df = pd.DataFrame(data)
+    df["Profit"] = df["Sales"] - df["Expenses"]
+
+    # Create a figure with 3 subplots
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    fig.suptitle("Business Dashboard", fontsize=16, fontweight="bold")
+
+    # 1. Sales Trend (Line Plot)
+    sns.lineplot(x="Month", y="Sales", data=df, marker="o", ax=axes[0,0])
+    axes[0,0].set_title("Monthly Sales Trend")
+
+    # 2. Profit vs Expenses (Bar Plot)
+    df_melt = df.melt(id_vars="Month", value_vars=["Expenses", "Profit"])
+    sns.barplot(x="Month", y="value", hue="variable", data=df_melt, ax=axes[0,1])
+    axes[0,1].set_title("Expenses vs Profit")
+
+    # 3. Total Distribution (Pie Chart)
+    totals = [df["Sales"].sum(), df["Expenses"].sum(), df["Profit"].sum()]
+    labels = ["Sales", "Expenses", "Profit"]
+    axes[1,0].pie(totals, labels=labels, autopct="%1.1f%%", startangle=90)
+    axes[1,0].set_title("Overall Distribution")
+
+    # Hide unused subplot
+    axes[1,1].axis("off")
+
+    plt.tight_layout(rect=[0, 0, 1, 0.95])  # Adjust layout for title
+    plt.show()
+
+# Run the dashboard
+if __name__ == "__main__":
+    create_dashboard()
