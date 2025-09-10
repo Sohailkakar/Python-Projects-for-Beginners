@@ -1,0 +1,32 @@
+import requests
+from bs4 import BeautifulSoup
+
+def scrape_headlines(url):
+    """
+    Function to scrape and display headlines from a given news website.
+    """
+    try:
+        # Send a GET request to the URL
+        response = requests.get(url)
+        response.raise_for_status()  # Raise error for invalid responses
+
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Find all headline tags (example: <h2> tags)
+        headlines = soup.find_all('h2')
+
+        if not headlines:
+            print("No headlines found. Try checking the HTML structure of the site.")
+            return
+
+        print(f"\nHeadlines from {url}:\n" + "-"*50)
+        for i, headline in enumerate(headlines, start=1):
+            # Get text inside the <h2> tag and strip extra spaces
+            print(f"{i}. {headline.get_text(strip=True)}")
+
+    except requests.exceptions.RequestException as e:
+        print("Error fetching the page:", e)
+
+# Example usage
+scrape_headlines("https://www.bbc.com/news")
