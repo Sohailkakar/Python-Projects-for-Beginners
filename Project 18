@@ -1,0 +1,68 @@
+import csv
+import os
+
+def expense_tracker():
+    # File to store expense data
+    filename = "expenses.csv"
+
+    # If the file doesn't exist, create it with headers "Category" and "Amount"
+    if not os.path.exists(filename):
+        with open(filename, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Category", "Amount"])
+
+    # Infinite loop to keep showing the menu until the user exits
+    while True:
+        print("\nExpense Tracker Options:")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Summary")
+        print("4. Exit")
+
+        # Get user’s choice
+        choice = input("Enter choice: ")
+
+        # Option 1: Add a new expense entry
+        if choice == "1":
+            category = input("Enter category (Food, Travel, etc.): ")
+            amount = float(input("Enter amount: "))
+            # Append expense to CSV file
+            with open(filename, "a", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow([category, amount])
+            print("Expense recorded.")
+
+        # Option 2: View all expenses
+        elif choice == "2":
+            with open(filename, "r") as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    print(row)
+
+        # Option 3: Show total expenses grouped by category
+        elif choice == "3":
+            summary = {}
+            with open(filename, "r") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    category = row["Category"]
+                    amount = float(row["Amount"])
+                    # Add amounts by category
+                    summary[category] = summary.get(category, 0) + amount
+
+            # Display the summary
+            print("\nSummary by Category:")
+            for cat, total in summary.items():
+                print(f"{cat}: ${total:.2f}")
+
+        # Option 4: Exit the program
+        elif choice == "4":
+            print("Exiting Expense Tracker.")
+            break
+
+        # Handle invalid menu choice
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+# Run the program
+expense_tracker()
